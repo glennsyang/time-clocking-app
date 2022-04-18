@@ -7,7 +7,25 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "eject": "expo eject"
+    "eject": "expo eject",
+    "lint": "eslint --ext .tsx --ext .ts src/",
+    "lint:fix": "eslint --ext .tsx --ext .ts src/ --fix",
+    "format": "prettier --check ./src",
+    "format:fix": "prettier --write ./src",
+    "fixme": "npm run format:fix && npm run lint:fix"
+  },
+  "lint-staged": {
+    "src/**/*.{ts,tsx}": [
+      "eslint --ext .tsx --ext .ts src/ --fix"
+    ],
+    "./src/**": [
+      "prettier --write ."
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   },
   "dependencies": {
     "expo": "~44.0.0",
@@ -21,6 +39,15 @@
     "@babel/core": "^7.12.9",
     "@types/react": "~17.0.21",
     "@types/react-native": "~0.64.12",
+    "@typescript-eslint/eslint-plugin": "^5.20.0",
+    "@typescript-eslint/parser": "^5.20.0",
+    "eslint": "^8.13.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.29.4",
+    "eslint-plugin-react-hooks": "^4.4.0",
+    "husky": "^7.0.4",
+    "lint-staged": "^12.3.8",
+    "prettier": "^2.6.2",
     "typescript": "~4.3.5"
   },
   "private": true
